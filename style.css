@@ -1,0 +1,63 @@
+body{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: #dddddd;
+}
+#area{    
+    width: 760px;
+    height: 450px;
+    border: solid 4px black; 
+    border-radius: 8px; 
+    background: #fff;  
+    padding: 16px;
+    position: relative;
+}
+
+.disabled{
+    pointer-events: none;
+}
+
+.ball {
+    width: 35px;
+    height: 35px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+}
+.ammo {
+    width: 25px;
+    height: 25px;
+    background: blue;
+    position: absolute;
+}
+
+#points,#ammo{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 5px;
+    color: red;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#start,#stop,#reset{
+    width: 250px;
+    height: 65px;
+    background: none;
+    color: #512355;
+    font-weight: bold;
+    border: solid 2px #512355;
+    border-radius: 8px;    
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+#start:hover,
+#stop:hover,
+#reset:hover{
+    background: #512355;
+    color: #FFF;
+}
