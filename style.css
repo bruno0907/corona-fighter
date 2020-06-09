@@ -17,10 +17,6 @@ body{
     position: relative;
 }
 
-.disabled{
-    pointer-events: none;
-}
-
 .ball {
     width: 35px;
     height: 35px;
@@ -35,15 +31,27 @@ body{
     position: absolute;
 }
 
-#points,#ammo{
+#pointsCounter,
+#ammoCounter,
+#hp{
     font-size: 2rem;
     font-weight: bold;
-    margin: 5px;
-    color: red;
+    margin: 15px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+#pointsCounter{
+    color: green;
+}
+#ammoCounter{
+    color: grey;
+}
+#hp{
+    color: red;
+}
 
-#start,#stop,#reset{
+#start,
+#stop,
+#reset{
     width: 250px;
     height: 65px;
     background: none;
@@ -53,6 +61,7 @@ body{
     border-radius: 8px;    
     margin-top: 25px;
     cursor: pointer;
+    outline: none;
 }
 
 #start:hover,
@@ -61,3 +70,27 @@ body{
     background: #512355;
     color: #FFF;
 }
+
+.btn-disabled{        
+    opacity: .7;
+    pointer-events: none;
+}
+
+.gameover{
+    visibility: hidden;
+    position: absolute;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;    
+    color: red;
+    font-size: 10rem;
+    animation: gameover 5s infinite;
+}
+.show-gameover{
+    visibility: visible
+}
+@keyframes gameover {
+    0%   {color: red; left: 260px; top: 0px;}
+    25%  {color: yellow; top: 0px;}
+    50%  {color: blue; left: 950px; top: 300px;}
+    75%  {color: green; top: 300px;}
+    100% {color: red; left: 260px; top: 0px;}
+  }
