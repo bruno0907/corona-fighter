@@ -36,28 +36,18 @@ h1{
 .ball {
     width: 85px;
     height: 85px;
-    /*background: red;
-    border-radius: 50%;*/
     position: absolute;
-    /*animation: example 10s infinite;*/
     
 }
 .ammo {
     width: 65px;
-    height: 65px;
-    /*background: grey;
-    position: absolute;*/
-    /*animation: example 10s infinite;*/
+    height: 65px;    
+    position: absolute;
 }
 
 @keyframes example {
     from {top: 0;}
-    to {top: 150%;}
-    /* 0%{left:0;}
-    25%{left:85%;}
-    50%{left:25%;}
-    75%{left:75%;}
-    100%{left:-20%;} */    
+    to {top: 150%;} 
 }
 
 .panel {
@@ -133,7 +123,6 @@ table td{
     color: red;
     font-size: 6rem;
     animation: gameover 5s infinite;
-    /*pointer-events: none;*/
 }
 
 @keyframes gameover {
