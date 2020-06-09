@@ -11,6 +11,7 @@ const hp = document.getElementById("hp")
 const gameover = "<h1 class=gameover>GAME OVER</h1>" 
 const howTo = "<h1 style=color:red>Clique nos coroninhas para ganhar pontos e vida</h1><h1>E</h1><h1 style=color:#3e7394>nos frascos de alcool em gel para reabaster</h1>"
 
+
 pointsCounter.innerHTML = parseFloat(0)
 ammoCounter.innerHTML = parseFloat(10)
 hp.innerHTML = parseFloat(15)
@@ -22,13 +23,12 @@ startBtn.addEventListener('click', startGame)
 //stopBtn.addEventListener('click', stopGame)
 resetBtn.addEventListener('click', resetGame)
 
-
-
 function loadingHandle(){
     area.innerHTML = howTo
     area.classList.add('disabled')
     //stopBtn.classList.add('btn-disabled')
-    resetBtn.classList.add('btn-disabled')
+    resetBtn.classList.add('btn-disabled')   
+
 }
 loadingHandle()
 
@@ -47,6 +47,11 @@ function gainHp(){
 function gainAmmo(){
     let totalAmmo = parseFloat(ammoCounter.innerHTML) 
     ammoCounter.innerHTML = totalAmmo + parseFloat(6);
+    function sfx() {
+        const audio = new Audio("alcool.mp3")
+        audio.play()
+    }
+    sfx()
 }
 
 function shoot(){    
@@ -56,7 +61,12 @@ function shoot(){
     if (ammoCounter.innerHTML == parseFloat(0)){
         stopGame()   
         area.innerHTML = gameover        
-    }    
+    }
+    function sfx() {
+        const audio = new Audio("spray.mp3")
+        audio.play()
+    }
+    sfx()
 }
 
 function addBall(){  
@@ -86,6 +96,11 @@ function popBall(el){
     area.removeChild(el)    
     pointsCounter.innerHTML++   
     gainHp()  
+    function sfx() {
+        const audio = new Audio("fart.mp3")
+        audio.play()
+    }
+    sfx()
 }
 
 function getAmmo(el){
@@ -106,8 +121,8 @@ function startGame(){
     }
 
     // GAME STARTS
-    gameRunning = setInterval(addBall, 750)
-    deployingAmmo = setInterval(addAmmo, 2500)   
+    gameRunning = setInterval(addBall, 650)
+    deployingAmmo = setInterval(addAmmo, 3500)   
 
     area.addEventListener('click', shoot)
 
