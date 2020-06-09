@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-
-</head>
-<body>
-    <div class="panel">
-        <span id="pointsCounter"></span>
-        <span id="ammoCounter"></span>
-        <span id="hp">1000</span>
-    </div>
-    <div id="area"><h1 class="gameover">GAME<br/>OVER</h1> </div>
-    <div class="btn">
-        <button id="start">START</button>
-        <button id="stop">STOP</button>
-        <button id="reset">RESET</button>
-    </div>
-       
-</body>
-
-<script src="index.js"></script>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Corona Fighter</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 style="color:green">CORONA FIGHTER</h1>
+            <div id="area"></div>
+            <!--<h1 class="gameover">GAME OVER</h1>-->
+            <div class="panel">
+                <table>
+                    <tr>
+                        <th>Pontos</th>
+                        <th>Alcool</th>
+                        <th>Vida</th>
+                    </tr>
+                    <tr>
+                        <td><span id="pointsCounter"></span></td>
+                        <td><span id="ammoCounter"></span></td>
+                        <td><span id="hp"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="btn">
+                <button id="start">START</button>
+                <button id="reset">RESET</button>
+            </div>
+        </div>
+    </body>
+    <script src="index.js"></script>
 </html>
