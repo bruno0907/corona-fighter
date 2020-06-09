@@ -10,25 +10,43 @@ const hp = document.getElementById("hp")
 
 const gameover = document.querySelector(".gameover")
 
-pointsCounter.innerHTML = 0
-ammoCounter.innerHTML = 10
-hp.innerHTML = 10
-
-life = parseFloat(hp.innerHTML) 
-
-function lifeDmg(){  
-
-    return hp.innerHTML = life--     
-        
-}
-//setInterval(lifeDmg, 1500)
-
-
-stopBtn.classList.add('btn-disabled')
-resetBtn.classList.add('btn-disabled')
+pointsCounter.innerHTML = parseFloat(0)
+ammoCounter.innerHTML = parseFloat(10)
+hp.innerHTML = parseFloat(15)
 
 let gameRunning // INTERVAL ID OF BALLS
 let deployingAmmo // INTERVAL ID OF AMMO
+
+startBtn.addEventListener('click', startGame)
+stopBtn.addEventListener('click', stopGame)
+resetBtn.addEventListener('click', resetGame)
+
+area.addEventListener('click', handleAmmo)
+
+function loadingHandle(){
+    area.classList.add('disabled')
+    stopBtn.classList.add('btn-disabled')
+    resetBtn.classList.add('btn-disabled')
+}
+loadingHandle()
+
+function takeDmg(){  
+    return hp.innerHTML--
+}
+
+function gainHp(){  
+    return hp.innerHTML++
+}
+
+function handleAmmo(){
+    if (ammoCounter.innerHTML > parseFloat(0)){
+        ammoCounter.innerHTML--
+    }
+    if (ammoCounter.innerHTML == parseFloat(0)){
+        stopGame()                        
+        gameover.classList.add('show-gameover')
+    }
+}
 
 function addBall(){     
     const ball = document.createElement("div")   
@@ -38,7 +56,12 @@ function addBall(){
     ball.setAttribute("style", "left:"+leftPos+"px;top:"+topPos+"px")
     ball.setAttribute("onclick", "popBall(this)")  
     area.appendChild(ball);    
-
+    takeDmg()
+    if (hp.innerHTML == parseFloat(0)){
+        stopGame()
+        gameover.classList.add('show-gameover')
+        return
+    }
 }
 
 function addAmmo(){       
@@ -53,45 +76,32 @@ function addAmmo(){
 
 function popBall(el){
     area.removeChild(el)    
-    pointsCounter.innerHTML++     
+    pointsCounter.innerHTML++   
+    gainHp()  
 }
 
 function getAmmo(el){
     area.removeChild(el)
     let totalAmmo = parseFloat(ammoCounter.innerHTML) 
-    ammoCounter.innerHTML = totalAmmo + 6;
+    ammoCounter.innerHTML = totalAmmo + parseFloat(6);
 }
 
-startBtn.addEventListener('click', startGame)
-stopBtn.addEventListener('click', stopGame)
-resetBtn.addEventListener('click', resetGame)
-
 function startGame(){    
+
+    area.classList.remove('disabled')
+
+    startBtn.classList.add('btn-disabled')
+    stopBtn.classList.remove('btn-disabled') 
+
     if(gameRunning, deployingAmmo) {        
         clearInterval(gameRunning)
         clearInterval(deployingAmmo)
     }
 
     // GAME STARTS
-    gameRunning = setInterval(addBall, 1000)
-    deployingAmmo = setInterval(addAmmo, 5000)
+    gameRunning = setInterval(addBall, 750)
+    deployingAmmo = setInterval(addAmmo, 2500)   
 
-    startBtn.classList.add('btn-disabled')
-    stopBtn.classList.remove('btn-disabled') 
-
-    area.classList.remove('disabled')
-
-    area.addEventListener('click', () => {
-        if (ammoCounter.innerHTML > 0){
-            ammoCounter.innerHTML--
-        }
-        if (ammoCounter.innerHTML == "0"){
-            stopGame()            
-            gameover.classList.add('show-gameover')
-            console.log('Vc perdeu!!!!')
-            return
-        }
-    })
 }
 
 function stopGame(){
@@ -115,11 +125,15 @@ function stopGame(){
 }
 
 function resetGame(){
-        gameover.classList.remove('show-gameover')
-        area.innerHTML = ""
-        pointsCounter.innerHTML = "0"
-        ammoCounter.innerHTML = "10" 
+    gameover.classList.remove('show-gameover')
 
-        startBtn.classList.remove('btn-disabled')
-        resetBtn.classList.add('btn-disabled')
-    }
+    area.innerHTML = ""
+    area.classList.add('disabled')
+
+    startBtn.classList.remove('btn-disabled')
+    resetBtn.classList.add('btn-disabled')
+
+    pointsCounter.innerHTML = parseFloat(0)
+    ammoCounter.innerHTML = parseFloat(10)
+    hp.innerHTML = parseFloat(15)    
+}

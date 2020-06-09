@@ -15,6 +15,9 @@ body{
     background: #fff;  
     padding: 16px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ball {
@@ -76,21 +79,24 @@ body{
     pointer-events: none;
 }
 
-.gameover{
+.disabled{
+    pointer-events: none;
+}
+
+.gameover{ 
     visibility: hidden;
-    position: absolute;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;    
     color: red;
-    font-size: 10rem;
+    font-size: 8rem;
     animation: gameover 5s infinite;
 }
 .show-gameover{
     visibility: visible
 }
 @keyframes gameover {
-    0%   {color: red; left: 260px; top: 0px;}
-    25%  {color: yellow; top: 0px;}
-    50%  {color: blue; left: 950px; top: 300px;}
-    75%  {color: green; top: 300px;}
-    100% {color: red; left: 260px; top: 0px;}
+    0%   {color: red;}
+    25%  {color: yellow;}
+    50%  {color: blue;}
+    75%  {color: green;}
+    100% {color: red;}
   }
