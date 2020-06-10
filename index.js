@@ -1,42 +1,64 @@
+const body = document.querySelector('body')
+
+window.addEventListener('load', function() {
+    body.setAttribute("style", "opacity: 1")
+})
+
 const area = document.getElementById("area")
 
 const startBtn = document.getElementById("start")
 const stopBtn = document.getElementById("stop")
 const resetBtn = document.getElementById("reset")
 
+
+const hp = document.getElementById("hp")
 const ammoCounter = document.getElementById("ammoCounter")
 const pointsCounter = document.getElementById("pointsCounter")  
-const hp = document.getElementById("hp")
 
-const gameover = "<h1 class=gameover>GAME OVER</h1>" 
+
+const hpBar = document.querySelector(".hp-bar-fill")
+const hpBarFill = hpBar.clientHeight
+
+
+const ammoBar = document.querySelector(".ammo-bar-fill")
+const ammoBarFill = ammoBar.clientHeight
+
+
+
+
+const gameover = "<h1 class=gameover>YOU HAVE DIED !!!!</h1>" 
 const howTo = "<h1 style=color:red>Clique nos coroninhas para ganhar pontos e vida</h1><h1>E</h1><h1 style=color:#3e7394>nos frascos de alcool em gel para reabaster</h1>"
 
-
 pointsCounter.innerHTML = parseFloat(0)
-ammoCounter.innerHTML = parseFloat(10)
-hp.innerHTML = parseFloat(15)
+ammoCounter.innerHTML = ammoBarFill * 100 / ammoBarFill
+hp.innerHTML = hpBarFill * 100 / hpBarFill
 
 let gameRunning // INTERVAL ID OF BALLS
 let deployingAmmo // INTERVAL ID OF AMMO
 
 startBtn.addEventListener('click', startGame)
-//stopBtn.addEventListener('click', stopGame)
 resetBtn.addEventListener('click', resetGame)
 
 function loadingHandle(){
     area.innerHTML = howTo
-    area.classList.add('disabled')
-    //stopBtn.classList.add('btn-disabled')
-    resetBtn.classList.add('btn-disabled')   
+    area.classList.add('disabled')        
+    resetBtn.classList.add('button-disabled')   
 
 }
 loadingHandle()
+
+
+function sfxPlay(audio) {
+    audio = new Audio(audio)  
+    audio.play()
+}
 
 function takeDmg(){ 
     hp.innerHTML--    
     if (hp.innerHTML == parseFloat(0)){
         stopGame()
-        area.innerHTML = gameover        
+        area.innerHTML = gameover
+        sfxPlay("gameover.sfx")
     }
 }
 
@@ -47,27 +69,35 @@ function gainHp(){
 function gainAmmo(){
     let totalAmmo = parseFloat(ammoCounter.innerHTML) 
     ammoCounter.innerHTML = totalAmmo + parseFloat(6);
-    function sfx() {
-        const audio = new Audio("alcool.mp3")
-        audio.play()
-    }
-    sfx()
+    sfxPlay("alcool.mp3")
 }
 
+// function shoot(){    
+//     if (ammoCounter.innerHTML > parseFloat(0)){
+//         ammoCounter.innerHTML--
+//     }
+//     if (ammoCounter.innerHTML == parseFloat(0)){
+//         stopGame()   
+//         area.innerHTML = gameover 
+//         sfxPlay("gameover.mp3")       
+//     }
+//     sfxPlay("spray.mp3")
+// }
+
 function shoot(){    
-    if (ammoCounter.innerHTML > parseFloat(0)){
-        ammoCounter.innerHTML--
+    if (ammo > 0){
+        ammo - 10
+        console.log(ammo)
     }
-    if (ammoCounter.innerHTML == parseFloat(0)){
+    if (ammo == 0){
         stopGame()   
-        area.innerHTML = gameover        
+        area.innerHTML = gameover 
+        //sfxPlay("gameover.mp3")       
     }
-    function sfx() {
-        const audio = new Audio("spray.mp3")
-        audio.play()
-    }
-    sfx()
+    sfxPlay("spray.mp3")
 }
+
+
 
 function addBall(){  
     const ball = document.createElement("img")  
@@ -93,14 +123,12 @@ function addAmmo(){
 }
 
 function popBall(el){
-    area.removeChild(el)    
+    el.setAttribute("src", "corona-splash.svg")
+    setTimeout(() => {     
+    area.removeChild(el)
     pointsCounter.innerHTML++   
     gainHp()  
-    function sfx() {
-        const audio = new Audio("fart.mp3")
-        audio.play()
-    }
-    sfx()
+    sfxPlay("fart.mp3")}, 250)
 }
 
 function getAmmo(el){
@@ -112,8 +140,7 @@ function startGame(){
     area.innerHTML = ""
     area.classList.remove('disabled')
 
-    startBtn.classList.add('btn-disabled')
-    //stopBtn.classList.remove('btn-disabled') 
+    startBtn.classList.add('button-disabled')
 
     if(gameRunning, deployingAmmo) {        
         clearInterval(gameRunning)
@@ -141,23 +168,12 @@ function stopGame(){
         ammo.classList.add('disabled')
     });
     
-    //stopBtn.classList.add('btn-disabled')
-    resetBtn.classList.remove('btn-disabled')
+    resetBtn.classList.remove('button-disabled')
 
     area.classList.add('disabled')
     
 }
 
 function resetGame(){
-
-    area.innerHTML = howTo
-    area.classList.add('disabled')
-
-    startBtn.classList.remove('btn-disabled')
-    //stopBtn.classList.add('btn-disabled')
-    resetBtn.classList.add('btn-disabled')
-
-    pointsCounter.innerHTML = parseFloat(0)
-    ammoCounter.innerHTML = parseFloat(10)
-    hp.innerHTML = parseFloat(15)    
+    document.location.reload(true)
 }

@@ -7,35 +7,46 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div class="container">
-            <header>
-                <img src="coronavirus.svg" class="icon-screen"><h1 style="color:green">CORONA FIGHTER</h1><img src="alcool.svg" class="icon-screen">
-            </header> 
+        <div id="container">
 
-            <div class="gaming-area">
+            <header>
+                <img src="coronavirus.svg" class="icon-screen">
+                <h1 style="color:green">CORONA FIGHTER</h1><img src="alcool.svg" class="icon-screen">
+            </header>
+                  
+            <div id="screen">  
+
+                <div id="button-area">
+                    <button class="button" id="start">START</button>
+                    <button class="button" id="reset">RESET</button>
+                    
+                </div>          
+            
+                <div class="points">
+                    <img src="coronavirus.svg" class="icon-screen">
+                    <p id="pointsCounter"></p>
+                    
+                </div>
+
                 <div class="panel">
-                    <div>
-                        <img src="coronavirus.svg" class="icon-screen">
-                        <p id="pointsCounter"></p>
-                    </div>
-                    <div>
-                        <img src="alcool.svg" class="icon-screen">
-                        <p id="ammoCounter"></p>
-                    </div>
-                    <div>
-                        <img src="hp.svg" class="icon-screen">
-                        <p id="hp"></p>
-                    </div>
+
+                    <div class="bar hp-bar"><div class="hp-bar-fill"></div></div>
+                    <img src="hp.svg" class="icon-screen">
+                    <p id="hp"></p>
+                    <button class="button" id="stop">STOP</button>
                 </div>
 
                 <div id="area"></div>
 
-            </div>
+                <div class="panel">
+                    
+                    <div class="bar ammo-bar"><div class="ammo-bar-fill"></div></div>
+                    <img src="alcool.svg" class="icon-screen">
+                    <p id="ammoCounter"></p>
+                    <button class="button" id="sair">SAIR</button>
+                </div>
 
-            <div class="btn">
-                <button id="start">START</button>
-                <button id="reset">RESET</button>
-            </div>            
+            </div>
 
         </div>
 
