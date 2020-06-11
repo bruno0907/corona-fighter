@@ -149,8 +149,8 @@ header h1{
 
 .ammo-bar-fill{
     background-color: #3e7394;
-    width: 100%;
-    height: 100% ; 
+    /* width: 100%;
+    height: 100%; */
     transition: height 850ms;
 }
 
@@ -163,7 +163,7 @@ header h1{
 }
 #pointsCounter,
 #ammoCounter,
-#hp {
+#hpCounter {
     font-size: 2rem;
     font-weight: bold;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
@@ -174,7 +174,7 @@ header h1{
 #ammoCounter {
     color: #3e7394;
 }
-#hp {
+#hpCounter {
     color: #ff0000;
 }
 

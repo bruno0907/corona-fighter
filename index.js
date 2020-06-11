@@ -11,27 +11,35 @@ const stopBtn = document.getElementById("stop")
 const resetBtn = document.getElementById("reset")
 
 
-const hp = document.getElementById("hp")
+const hpCounter = document.getElementById("hpCounter")
 const ammoCounter = document.getElementById("ammoCounter")
 const pointsCounter = document.getElementById("pointsCounter")  
 
 
-const hpBar = document.querySelector(".hp-bar-fill")
-const hpBarFill = hpBar.clientHeight
+let totalHp = 100
+const dmgValue = 5
+let hpAdd = 10
 
+const hpBar = document.querySelector(".hp-bar-fill")
+hpBar.style.height = "100%"
+hpCounter.innerHTML = hpBar.style.height
+
+
+let totalAmmo = 100
+const bulletCost = 5
+let bulletAdd = 10
 
 const ammoBar = document.querySelector(".ammo-bar-fill")
-const ammoBarFill = ammoBar.clientHeight
-
-
+ammoBar.style.height = "100%"
+ammoCounter.innerHTML = ammoBar.style.height
 
 
 const gameover = "<h1 class=gameover>YOU HAVE DIED !!!!</h1>" 
 const howTo = "<h1 style=color:red>Clique nos coroninhas para ganhar pontos e vida</h1><h1>E</h1><h1 style=color:#3e7394>nos frascos de alcool em gel para reabaster</h1>"
 
+
 pointsCounter.innerHTML = parseFloat(0)
-ammoCounter.innerHTML = ammoBarFill * 100 / ammoBarFill
-hp.innerHTML = hpBarFill * 100 / hpBarFill
+
 
 let gameRunning // INTERVAL ID OF BALLS
 let deployingAmmo // INTERVAL ID OF AMMO
@@ -53,52 +61,6 @@ function sfxPlay(audio) {
     audio.play()
 }
 
-function takeDmg(){ 
-    hp.innerHTML--    
-    if (hp.innerHTML == parseFloat(0)){
-        stopGame()
-        area.innerHTML = gameover
-        sfxPlay("gameover.sfx")
-    }
-}
-
-function gainHp(){  
-    return hp.innerHTML++
-}
-
-function gainAmmo(){
-    let totalAmmo = parseFloat(ammoCounter.innerHTML) 
-    ammoCounter.innerHTML = totalAmmo + parseFloat(6);
-    sfxPlay("alcool.mp3")
-}
-
-// function shoot(){    
-//     if (ammoCounter.innerHTML > parseFloat(0)){
-//         ammoCounter.innerHTML--
-//     }
-//     if (ammoCounter.innerHTML == parseFloat(0)){
-//         stopGame()   
-//         area.innerHTML = gameover 
-//         sfxPlay("gameover.mp3")       
-//     }
-//     sfxPlay("spray.mp3")
-// }
-
-function shoot(){    
-    if (ammo > 0){
-        ammo - 10
-        console.log(ammo)
-    }
-    if (ammo == 0){
-        stopGame()   
-        area.innerHTML = gameover 
-        //sfxPlay("gameover.mp3")       
-    }
-    sfxPlay("spray.mp3")
-}
-
-
-
 function addBall(){  
     const ball = document.createElement("img")  
     ball.setAttribute("src", "coronavirus.svg") 
@@ -108,7 +70,7 @@ function addBall(){
     ball.setAttribute("style", "left:"+leftPos+"%;top:"+topPos+"%")
     ball.setAttribute("onclick", "popBall(this)")  
     area.appendChild(ball);
-    takeDmg()
+    takeDmg(totalHp, dmgValue)
 }
 
 function addAmmo(){   
@@ -127,14 +89,61 @@ function popBall(el){
     setTimeout(() => {     
     area.removeChild(el)
     pointsCounter.innerHTML++   
-    gainHp()  
-    sfxPlay("fart.mp3")}, 250)
+    gainHp(totalHp, hpAdd)  
+    sfxPlay("fart.mp3")}, 150)
 }
 
 function getAmmo(el){
     area.removeChild(el)
-    gainAmmo()
+    gainAmmo(totalAmmo, bulletAdd)
 }
+
+function takeDmg(a, b){    
+    hpBar.style.height = `${a - b}%`   
+    hpCounter.innerHTML = hpBar.style.height
+
+    if (totalHp == 0){
+        stopGame()
+        area.innerHTML = gameover
+        sfxPlay("gameover.mp3")
+    }
+    return totalHp = a - b
+}
+
+function fire(a, b){  
+
+    if (totalAmmo > 0){
+        ammoBar.style.height = `${a - b}%`   
+        ammoCounter.innerHTML = ammoBar.style.height
+
+        sfxPlay("spray.mp3") 
+        return totalAmmo = a - b
+        
+    } else {
+        area.innerHTML = gameover   
+        sfxPlay("gameover.mp3")
+        stopGame() 
+    }
+
+    // CONSERTAR A PARTE DA MORTE AO ACABAR OS TIROS e DISPARO SEM FIM DA MUSICA DE GAMEOVER AO FICAR CLICKANDO
+
+}
+
+function gainHp(a, b){ 
+    hpBar.style.height = `${a + b}%`   
+    hpCounter.innerHTML = hpBar.style.height
+    totalHp = a + b  
+    console.log(totalHp)      
+}
+
+function gainAmmo(a, b){
+    ammoBar.style.height = `${a + b}%`   
+    ammoCounter.innerHTML = ammoBar.style.height    
+    sfxPlay("alcool.mp3")
+    totalAmmo = a + b
+    console.log(totalAmmo)
+}
+
 
 function startGame(){    
     area.innerHTML = ""
@@ -151,7 +160,9 @@ function startGame(){
     gameRunning = setInterval(addBall, 650)
     deployingAmmo = setInterval(addAmmo, 3500)   
 
-    area.addEventListener('click', shoot)
+    area.addEventListener('click', () => {
+        fire(totalAmmo, bulletCost)
+    })
 
 }
 
