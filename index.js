@@ -84,11 +84,11 @@ function addAmmo(){
     area.appendChild(ammo);
 }
 
-function popBall(el){
+function popBall(el){    
     el.setAttribute("src", "corona-splash.svg")
     setTimeout(() => {     
     area.removeChild(el)
-    pointsCounter.innerHTML++   
+    pointsCounter.innerHTML++  
     gainHp(totalHp, hpAdd)  
     sfxPlay("fart.mp3")}, 150)
 }
@@ -111,7 +111,6 @@ function takeDmg(a, b){
 }
 
 function fire(a, b){  
-
     if (totalAmmo > 0){
         ammoBar.style.height = `${a - b}%`   
         ammoCounter.innerHTML = ammoBar.style.height
@@ -124,26 +123,24 @@ function fire(a, b){
         sfxPlay("gameover.mp3")
         stopGame() 
     }
-
-    // CONSERTAR A PARTE DA MORTE AO ACABAR OS TIROS e DISPARO SEM FIM DA MUSICA DE GAMEOVER AO FICAR CLICKANDO
-
 }
 
-function gainHp(a, b){ 
-    hpBar.style.height = `${a + b}%`   
-    hpCounter.innerHTML = hpBar.style.height
-    totalHp = a + b  
-    console.log(totalHp)      
+function gainHp(a, b){     
+    if (totalHp < 99){
+        hpBar.style.height = `${a + b}%`   
+        hpCounter.innerHTML = hpBar.style.height
+        totalHp = a + b 
+    } 
 }
 
 function gainAmmo(a, b){
-    ammoBar.style.height = `${a + b}%`   
-    ammoCounter.innerHTML = ammoBar.style.height    
-    sfxPlay("alcool.mp3")
-    totalAmmo = a + b
-    console.log(totalAmmo)
+    if (totalAmmo < 99){
+        ammoBar.style.height = `${a + b}%`   
+        ammoCounter.innerHTML = ammoBar.style.height    
+        sfxPlay("alcool.mp3")
+        totalAmmo = a + b
+    }
 }
-
 
 function startGame(){    
     area.innerHTML = ""
