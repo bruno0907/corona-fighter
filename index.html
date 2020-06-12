@@ -4,22 +4,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Corona Fighter</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="./src/css/style.css">
+        <link rel="shortcut icon" href="./public/images/coronavirus.svg">
     </head>
     <body>
 
         <div id="header">
             <div id="playing">
-                <span>Now Playing: ...</span>
+                <span>Now Playing: <span id="timer">0</span></span>
             </div>
             <div id="logo">
-                <img src="coronavirus.svg" class="screen-icons">
+                <img src="./public/images/coronavirus.svg" class="screen-icons">
                     <span style="color:green">CORONA FIGHTER</span>
-                <img src="alcool.svg" class="screen-icons">
+                <img src="./public/images/alcool.svg" class="screen-icons">
             </div>   
             <div id="points">
                 <span id="pointsCounter">0</span>
-                <img src="coronavirus.svg" class="screen-icons">                
+                <img src="./public/images/coronavirus.svg" class="screen-icons">                
                 </div> 
         </div>
 
@@ -29,8 +30,7 @@
 
                 <div class="panel">
                     <div class="bar hp-bar"><div class="hp-bar-fill"></div></div>
-                    <img src="hp.svg" class="screen-icons">
-                    <p id="hpCounter"></p>
+                    <img src="./public/images/hp.svg" class="screen-icons">                    
                     <button class="button" id="pause">PAUSE</button>
                 </div>
 
@@ -38,8 +38,7 @@
 
                 <div class="panel">                    
                     <div class="bar ammo-bar"><div class="ammo-bar-fill"></div></div>
-                    <img src="alcool.svg" class="screen-icons">
-                    <p id="ammoCounter"></p>
+                    <img src="./public/images/alcool.svg" class="screen-icons">                    
                     <button class="button" id="quit" onclick="">QUIT</button>
                 </div>
 
@@ -54,15 +53,15 @@
         <div id="howTo">
             <h1>Point Click to shoot or grab</h1>
             <div class="tutorial">
-                <img src="coronavirus.svg" class="screen-icons" alt="">
+                <img src="./public/images/coronavirus.svg" class="screen-icons" alt="">
                 <h3>Shoot the Covid-19 to gain life and stay alive!</h3>                
             </div>
             <div class="tutorial">
-                <img src="alcool.svg" class="screen-icons" alt="">
+                <img src="./public/images/alcool.svg" class="screen-icons" alt="">
                 <h3>Grab alcohol bottles to fill you up and keep fighting!</h3>                
             </div>
             <div class="tutorial">
-                <img src="cloroquina.svg" class="screen-icons"alt="">
+                <img src="./public/images/cloroquina.svg" class="screen-icons"alt="">
                 <h3>Hydroxicloroquine Pills are a wild card and can give u a ammount of Life or Take a chunk of it!</h3>                
             </div>
         </div>
@@ -82,5 +81,5 @@
         </div>  
 
     </body>
-    <script src="index.js"></script>
+    <script src="./src/js/index.js"></script>
 </html>
